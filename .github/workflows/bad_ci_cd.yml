@@ -1,0 +1,27 @@
+name: Bad CI/CD Workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt || true
+          npm install -g @angular/cli
+
+      - name: Install pytest
+        run: pip install pytest
+
+      - name: Run tests
+        run: pytest || echo "Tests failed"
+
+      - name: Deploy application
+        run: |
+          echo "Deploying to production"
+          echo "Pretend to connect and deploy to server"
