@@ -1,0 +1,31 @@
+name: Good CI/CD Workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: pip install -r lab4/requirements.txt
+
+      - name: Install Angular CLI locally
+        run: npm install @angular/cli
+
+      - name: Run tests
+        run: pytest lab4/tests/
+
+      - name: Deploy application
+        if: success()
+        run: |
+          echo "Deploying to production..."
+          echo "Pretend to connect and deploy to server" 
