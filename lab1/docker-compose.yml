@@ -21,6 +21,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/assets:/var/www/html/assets
     depends_on:
       - server1
       - server2
